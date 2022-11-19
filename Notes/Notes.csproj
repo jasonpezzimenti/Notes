@@ -8,10 +8,33 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Notes</RootNamespace>
     <AssemblyName>Notes</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ProductName>Notes</ProductName>
+    <PublisherName>Jason Pezzimenti</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>67</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -28,13 +51,75 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>953297840329A12D26179C8D957B1DD23AB005E8</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Notes_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>notesiconfavi.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ALMSTWKND.UI.WindowsForms.Controls2">
+      <HintPath>..\..\ALMSTWKND.UI.WindowsForms.Controls\ALMSTWKND.UI.WindowsForms.Controls\bin\Release\ALMSTWKND.UI.WindowsForms.Controls2.dll</HintPath>
+    </Reference>
+    <Reference Include="Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Switch-Control.1.0.0\lib\net46\Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="FILO">
+      <HintPath>..\..\FILO\FILO\bin\Release\net6.0\FILO.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.6\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +131,108 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="ChooseRecordingNameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChooseRecordingNameWindow.Designer.cs">
+      <DependentUpon>ChooseRecordingNameWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmationWindow.Designer.cs">
+      <DependentUpon>ConfirmationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CopyrightInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyrightInformation.Designer.cs">
+      <DependentUpon>CopyrightInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomTreeView.Designer.cs">
+      <DependentUpon>CustomTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extension.cs" />
+    <Compile Include="ExtensionInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtensionInformation.Designer.cs">
+      <DependentUpon>ExtensionInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FindAndReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindAndReplace.Designer.cs">
+      <DependentUpon>FindAndReplace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Group.cs" />
+    <Compile Include="KeyboardShortcutSetupWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeyboardShortcutSetupWindow.Designer.cs">
+      <DependentUpon>KeyboardShortcutSetupWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageExtensionsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageExtensionsWindow.Designer.cs">
+      <DependentUpon>ManageExtensionsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewGroupWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewGroupWindow.Designer.cs">
+      <DependentUpon>NewGroupWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Note.cs" />
+    <Compile Include="NoteSelectionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NoteSelectionWindow.Designer.cs">
+      <DependentUpon>NoteSelectionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreviousVersion.cs" />
+    <Compile Include="PropertiesWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertiesWindow.Designer.cs">
+      <DependentUpon>PropertiesWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StackList.cs" />
+    <Compile Include="TextField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextField.Designer.cs">
+      <DependentUpon>TextField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Token.cs" />
+    <Compile Include="Tokenizer.cs" />
+    <Compile Include="TokenizerWorkingOLD.cs" />
+    <Compile Include="Interpreter.cs" />
+    <Compile Include="QuadrupalList.cs" />
+    <Compile Include="TripleTypeList.cs" />
+    <Compile Include="ViewAttachmentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewAttachmentWindow.Designer.cs">
+      <DependentUpon>ViewAttachmentWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +241,48 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChooseRecordingNameWindow.resx">
+      <DependentUpon>ChooseRecordingNameWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmationWindow.resx">
+      <DependentUpon>ConfirmationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyrightInformation.resx">
+      <DependentUpon>CopyrightInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionInformation.resx">
+      <DependentUpon>ExtensionInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindAndReplace.resx">
+      <DependentUpon>FindAndReplace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyboardShortcutSetupWindow.resx">
+      <DependentUpon>KeyboardShortcutSetupWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageExtensionsWindow.resx">
+      <DependentUpon>ManageExtensionsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewGroupWindow.resx">
+      <DependentUpon>NewGroupWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NoteSelectionWindow.resx">
+      <DependentUpon>NoteSelectionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertiesWindow.resx">
+      <DependentUpon>PropertiesWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextField.resx">
+      <DependentUpon>TextField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewAttachmentWindow.resx">
+      <DependentUpon>ViewAttachmentWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
     </EmbeddedResource>
@@ -65,7 +294,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Notes_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -79,5 +312,44 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notesicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="newnotesiconfavicon.ico" />
+    <Content Include="notesicon.ico" />
+    <Content Include="notesiconfavi.ico" />
+    <None Include="Resources\questionmark.png" />
+    <None Include="Resources\erroricon.png" />
+    <None Include="Resources\newnotesicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".group">
+      <Visible>False</Visible>
+      <Description>Group File</Description>
+      <Progid>Notes</Progid>
+      <DefaultIcon>notesiconfavi.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets'))" />
+  </Target>
 </Project>
