@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Windows.Shell;
 
 namespace Notes
 {
@@ -592,6 +593,7 @@ namespace Notes
 			// the form moving around while it's being centered.
 			// Can't remember if this is an actual problem or not. But doing it anyway.
 			this.Hide();
+
 			//PerformStartupOperations();
 
 			//CreateStartupNote();
@@ -1456,6 +1458,10 @@ namespace Notes
 				{
 					editor.Font = dialog.Font;
 					editor.ForeColor = dialog.Color;
+
+					// Change the Font globally.
+					needsSaving = true;
+					ConveyThatChangesNeedSaving();
 				}
 			}
 		}
