@@ -219,8 +219,9 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="StackList.cs" />
-    <Compile Include="Token.cs" />
+    <Compile Include="TokenLESSOLD.cs" />
     <Compile Include="Tokenizer.cs" />
+    <Compile Include="TokenizerWorkingLESSOLD.cs" />
     <Compile Include="TokenizerWorkingOLD.cs" />
     <Compile Include="Interpreter.cs" />
     <Compile Include="QuadrupalList.cs" />

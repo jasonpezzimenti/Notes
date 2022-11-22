@@ -13,11 +13,11 @@ namespace Notes
 {
 	public class Interpreter
 	{
-		private List<Token> theseTokens;
+		private List<TokenLESSOLD> theseTokens;
 
-		public Interpreter(List<Token> tokens)
+		public Interpreter(List<TokenLESSOLD> tokens)
 		{
-			theseTokens = tokens.ToList<Token>();
+			theseTokens = tokens.ToList<TokenLESSOLD>();
 		}
 
 		public void Interpret(CustomTreeView list, TextBox editor)
@@ -25,7 +25,7 @@ namespace Notes
 
 		}
 
-		private Token Peek(int index)
+		private TokenLESSOLD Peek(int index)
 		{
 			return theseTokens[index];
 		}

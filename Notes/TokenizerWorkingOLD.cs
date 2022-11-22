@@ -9,7 +9,7 @@ namespace Notes
 {
 	public class TokenizerWorkingOLD
 	{
-		public StackList<Token> tokens;
+		public StackList<TokenLESSOLD> tokens;
 		private string publicGroupIdentifier;
 		public string identifier,
 			eventKeyeword,
@@ -33,7 +33,7 @@ namespace Notes
 
 		public TokenizerWorkingOLD()
 		{
-			tokens = new StackList<Token>();
+			tokens = new StackList<TokenLESSOLD>();
 		}
 
 		public struct Types
@@ -91,7 +91,7 @@ namespace Notes
 							{
 								if (!String.IsNullOrEmpty(value))
 								{
-									tokens.Add(new Token()
+									tokens.Add(new TokenLESSOLD()
 									{
 										Type = "Type",
 										Value = value
@@ -102,7 +102,7 @@ namespace Notes
 							}
 							else
 							{
-								tokens.Add(new Token()
+								tokens.Add(new TokenLESSOLD()
 								{
 									Type = "Identifier",
 									Value = value
@@ -115,7 +115,7 @@ namespace Notes
 						{
 							if (!String.IsNullOrEmpty(value))
 							{
-								tokens.Add(new Token()
+								tokens.Add(new TokenLESSOLD()
 								{
 									Type = "Action",
 									Value = value
@@ -133,7 +133,7 @@ namespace Notes
 						}
 						else if (character == ';')
 						{
-							tokens.Add(new Token()
+							tokens.Add(new TokenLESSOLD()
 							{
 								Type = "StringContent",
 								Value = value

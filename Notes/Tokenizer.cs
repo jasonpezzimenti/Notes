@@ -3,158 +3,157 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Notes
 {
 	public class Tokenizer
 	{
-		public List<Token> tokens;
+		private Char[] chars;
+		private int length;
+		private int index = 0;
+		private int row = 0;
+		private int col = 0;
 
-		public string identifier = String.Empty,
-			value = String.Empty,
-			content = String.Empty;
-
-		public bool isInsideString = false;
-
-		public char character;
-
-		public int position = 0;
-
-		public Tokenizer()
+		public Tokenizer(string source)
 		{
-			tokens = new List<Token>();
+			chars = source.ToCharArray();
+			length = chars.Length;
 		}
 
-		public struct Types
+		public IEnumerable<Token> Tokenize()
 		{
-			public const string Note = "Note";
-			public const string Group = "Group";
-		}
-
-		public void Tokenize(string input)
-		{
-			tokens.Clear();
-
-			if(!String.IsNullOrEmpty(input))
+			var ch = chars[index];
+			while (index < length)
 			{
-				bool backSlashFound = false;
-				string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				if (Char.IsLetter(ch))
+					yield return Identifier();
+				else if (Char.IsDigit(ch))
+					yield return Number();
+				else if (Char.IsWhiteSpace(ch))
+					yield return WhiteSpace();
+				else switch (ch)
+					{
+						case '"': yield return Stringtoken(); break;
+						case '-':
+							index++;
+							col++;
+							ch = index < length ? chars[index] : '\0';
+							switch (ch)
+							{
+								case '>': col++; index++; yield return new Token { source = "->", value = "->", row = row, column = col, type = TokenType.Operator }; break;
+								default: yield return new Token { source = "-", value = "-", row = row, column = col, type = TokenType.Operator }; break;
+							}
+							break;
+						case '{': col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Operator }; break;
+						case '}': col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Operator }; break;
+						case '.': col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Operator }; break;
+						case ';': col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Operator }; break;
+						case '[': col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Operator }; break;
+						case ']': col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Operator }; break;
+						case ':': col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Operator }; break;
+						default:
+							col++; index++; yield return new Token { source = $"{ch}", value = $"{ch}", row = row, column = col, type = TokenType.Unknown }; break;
+					}
 
-				for(int index = 0; index < input.Length; index++)
+				ch = index < length ? chars[index] : '\0';
+			}
+		}
+
+		Token Stringtoken()
+		{
+			var localIndex = index + 1;
+			var localCols = col;
+			var content = new StringBuilder();
+			while (localIndex < length && chars[localIndex] != '"')
+			{
+				localCols++;
+				if (chars[localIndex] == '\n')
 				{
-					int position = index;
-					character = input[position];
-
-					if (isInsideString)
+					row++;
+					localCols = 0;
+				}
+				if (chars[localIndex] == '\\')
+				{
+					if (localIndex + 1 < length)
 					{
-						if (character == '\\')
+						localIndex++;
+						localCols++;
+						if (chars[localIndex] == '\n')
 						{
-							backSlashFound = true;
-							continue;
-						}
-
-						if (character == '"')
-						{
-							if (backSlashFound)
-							{
-								value += character;
-								backSlashFound = false;
-							}
-							else
-							{
-								isInsideString = false;
-								continue;
-							}
-						}
-						else
-						{
-							value += character;
-						}
-					}
-					else if (alphabet.Contains(character.ToString().ToUpper()))
-					{
-						value += character;
-					}
-					else
-					{
-						switch (character)
-						{
-							case '@':
-								tokens.Add(new Token() { Type = "Type", Value = character.ToString() });
-								break;
-							case ':':
-								if(!String.IsNullOrEmpty(value))
-								{
-									tokens.Add(new Token() { Type = "Identifier", Value = value });
-									value = String.Empty;
-								}
-								else
-								{
-									continue;
-								}
-								break;
-							case '"':
-								if (!isInsideString)
-								{
-									isInsideString = true;
-								}
-								break;
-							case ';':
-								if (!String.IsNullOrEmpty(value))
-								{
-									tokens.Add(new Token() { Type = "StringContent", Value = value });
-									tokens.Add(new Token() { Type = "EndOfStatement", Value = character.ToString() });
-								}
-								else
-								{
-									tokens.Add(new Token() { Type = "EndOfStatement", Value = character.ToString() });
-								}
-
-								value = String.Empty;
-								break;
-							case '(':
-								tokens.Add(new Token() { Type = "Verb", Value = value });
-								tokens.Add(new Token() { Type = "OpeningParenthesis", Value = character.ToString() });
-
-								value = String.Empty;
-								break;
-							case ',':
-								tokens.Add(new Token() { Type = "Parameter", Value = value });
-								tokens.Add(new Token() { Type = "ContinuationOperator", Value = character.ToString() });
-
-								value = String.Empty;
-								break;
-							case ')':
-								if(!String.IsNullOrEmpty(value))
-								{
-									tokens.Add(new Token() { Type = "Parameter", Value = value });
-									tokens.Add(new Token() { Type = "ClosingParenthesis", Value = character.ToString() });
-
-									value = String.Empty;
-								}
-								else
-								{
-									tokens.Add(new Token() { Type = "ClosingParenthesis", Value = character.ToString() });
-
-									value = String.Empty;
-								}
-								break;
-							default:
-								if (!isInsideString && character != ' ')
-								{
-									value += character;
-								}
-								break;
+							row++;
+							localCols = 0;
 						}
 					}
 				}
+				content.Append(chars[localIndex]);
+				localIndex++;
 			}
-
-			foreach(Token token in tokens)
-			{
-				Console.WriteLine(token.Type + " " + token.Value);
-			}
+			var source = chars.AsSpan().Slice(index, localIndex - index + 1).ToString();
+			var value = content.ToString();
+			col = localCols + 1;
+			index = localIndex + 1;
+			return new Token { source = source, value = value, row = row, column = col, type = TokenType.String };
 		}
+
+		Token WhiteSpace()
+		{
+			var localIndex = index + 1;
+			var localCols = col;
+			while (localIndex < length && Char.IsWhiteSpace(chars[localIndex]))
+			{
+				localCols++;
+				if (chars[localIndex] == '\n')
+				{
+					row++;
+					localCols = 0;
+				}
+				localIndex++;
+			}
+			var value = chars.AsSpan().Slice(index, localIndex - index).ToString();
+			col = localCols;
+			index = localIndex;
+			return new Token { source = value, value = value, row = row, column = col, type = TokenType.Whitespace };
+		}
+
+		Token Number()
+		{
+			var localIndex = index + 1;
+			while (localIndex < length && Char.IsDigit(chars[localIndex]))
+				localIndex++;
+			var value = chars.AsSpan().Slice(index, localIndex - index).ToString();
+			col += value.Length;
+			index = localIndex;
+			return new Token { source = value, value = value, row = row, column = col, type = TokenType.Number };
+		}
+
+		Token Identifier()
+		{
+			var localIndex = index + 1;
+			while (localIndex < length && Char.IsLetterOrDigit(chars[localIndex]))
+				localIndex++;
+			var value = chars.AsSpan().Slice(index, localIndex - index).ToString();
+			col += value.Length;
+			index = localIndex;
+			return new Token { source = value, value = value, row = row, column = col, type = TokenType.Identifier };
+		}
+	}
+
+	public class Token
+	{
+		public int row;
+		public int column;
+		public string source;
+		public string value;
+		public TokenType type;
+	}
+
+	public enum TokenType
+	{
+		Identifier,
+		Number,
+		String,
+		Whitespace,
+		Operator,
+		Unknown
 	}
 }

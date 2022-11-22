@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Notes
 {
-	public class Token
+	public class TokenLESSOLD
 	{
 		public string Type { get; set; }
 		public string Value { get; set; }

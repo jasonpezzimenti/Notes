@@ -255,104 +255,6 @@ namespace Notes
 			editor.Text = thisEditor.Text;
 		}
 
-		//public void Interpret(StackList<Token> tokens)
-		//{
-		//	bool isExpectingType = true,
-		//		isExpectingIdentifier = false,
-		//		lookingForNote,
-		//		isExpectingAction = false,
-		//		isSettingContent = false,
-		//		isExpectingString = false;
-		//	TreeNode selectedNode;
-
-		//	List<Token> theseTokens = tokens.ToList<Token>();
-		//	theseTokens.Reverse();
-
-		//	foreach (Token token in theseTokens)
-		//	{
-		//		Console.WriteLine(token.Type + " " + token.Value);
-		//	}
-
-		//	if (theseTokens != null)
-		//	{
-		//		Note note = new Note();
-		//		Group group = new Group();
-
-		//		for (int index = 0; index < theseTokens.Count; index++)
-		//		{
-		//			if (isExpectingType)
-		//			{
-		//				if (theseTokens[index].Type == "Type")
-		//				{
-		//					if (theseTokens[index].Value == "Note")
-		//					{
-		//						isExpectingIdentifier = true;
-		//						isExpectingType = false;
-		//						lookingForNote = true;
-		//					}
-		//				}
-		//			}
-		//			else if (isExpectingIdentifier)
-		//			{
-		//				if (theseTokens[index].Type == "Identifier")
-		//				{
-		//					// We have an identifier.
-		//					if (theseTokens[index].Value == "SelectedNote")
-		//					{
-		//						// See if the list is null and if there is a selected node (note).
-		//						if (list.Nodes != null && list.SelectedNode != null)
-		//						{
-		//							// Get the selected node.
-		//							if (list.SelectedNode.Parent != null)
-		//							{
-		//								// This is not the Parent Node.
-		//								selectedNode = list.SelectedNode;
-
-		//								if (selectedNode != null)
-		//								{
-		//									isExpectingAction = true;
-		//									isExpectingIdentifier = false;
-
-		//									continue;
-		//								}
-		//							}
-		//						}
-		//					}
-		//				}
-		//			}
-		//			else if (isExpectingAction)
-		//			{
-		//				if (theseTokens[index].Type == "Action")
-		//				{
-		//					if (theseTokens[index].Value == "SetContent")
-		//					{
-		//						isSettingContent = true;
-		//						isExpectingAction = false;
-		//						isExpectingString = true;
-		//					}
-		//				}
-		//			}
-		//			else if (isExpectingString)
-		//			{
-		//				if (theseTokens[index].Type == "Identifier")
-		//				{
-		//					string content = theseTokens[index].Value;
-
-		//					// Get the note and add the content to it.
-		//					Group thisGroup = stack.Where(i => i.Name == list.SelectedNode.Parent.Text).FirstOrDefault();
-
-		//					Note thisNote = thisGroup.Notes.Where(n => n.Name == list.SelectedNode.Text).FirstOrDefault();
-
-		//					if (thisNote != null)
-		//					{
-		//						editor.Text = content;
-		//					}
-		//				}
-		//			}
-		//		}
-		//	}
-		//}
-
 		private void FindButton_Click(object sender, EventArgs e)
 		{
 			if (editor.Enabled)
@@ -1617,14 +1519,14 @@ namespace Notes
 							// Run the tokenizer over the extension.
 							statePanel.Text = "State: Tokenizing.";
 
-							Tokenizer tokenizer = new Tokenizer();
-							tokenizer.Tokenize(content);
+							Tokenizer tokenizer = new Tokenizer(content);
+							tokenizer.Tokenize();
 
 							// Now run the interpreter.
 							statePanel.Text = "State: Interpreting the Extension.";
 
-							Interpreter interpreter = new Interpreter(tokenizer.tokens);
-							interpreter.Interpret(list, editor);
+							//Interpreter interpreter = new Interpreter(tokenizer.tokens);
+							//interpreter.Interpret(list, editor);
 
 							statePanel.Text = "State: Idle.";
 						}
