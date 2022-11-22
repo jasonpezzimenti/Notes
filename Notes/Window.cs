@@ -289,33 +289,7 @@ namespace Notes
 
 		private void newNoteMenuItem_Click(object sender, EventArgs e)
 		{
-			list.BeginUpdate();
-
-			list.SelectedNode.Nodes.Add("Untitled").Tag = stack.Count + 1.ToString();
-
-			if (list.SelectedNode.Parent == null)
-			{
-				Group group = stack.Where<Group>(g => g.Name == list.SelectedNode.Text).FirstOrDefault();
-
-				if (group != null)
-				{
-					group.Notes.Add(new Note()
-					{
-						Name = "Untitled",
-						Created = DateTime.Now
-					});
-				}
-			}
-
-			list.EndUpdate();
-
-			if (list.SelectedNode.Parent != null)
-			{
-				// We have a Parent Node. Expand it for the User.
-				list.SelectedNode.Parent.Expand();
-
-			}
-
+			CreateNewNote();
 			ConveyThatChangesNeedSaving();
 		}
 
@@ -340,7 +314,6 @@ namespace Notes
 						Group group = new Group();
 						group.Id = stack.Count;
 						group.Name = groupName;
-						group.Notes.Add(new Note() { Name = "Untitled" });
 
 						stack.Add(group);
 
@@ -362,7 +335,6 @@ namespace Notes
 			Group group = new Group();
 			group.Id = stack.Count;
 			group.Name = name;
-			group.Notes.Add(new Note() { Name = "Untitled" });
 
 			stack.Add(group);
 
@@ -394,7 +366,7 @@ namespace Notes
 
 			if (list.SelectedNode != null)
 			{
-				list.SelectedNode.Nodes.Add("Untitled");
+				TreeNode node = list.SelectedNode.Nodes.Add("Untitled");
 
 				Group group = stack.Where<Group>(g => g.Name == list.SelectedNode.Text).FirstOrDefault();
 
@@ -405,6 +377,10 @@ namespace Notes
 						Name = "Untitled",
 						Created = DateTime.Now
 					});
+
+					list.SelectedNode.Expand();
+
+					list.SelectedNode = node;
 				}
 				else
 				{
@@ -412,13 +388,6 @@ namespace Notes
 			}
 
 			list.EndUpdate();
-
-			if (list.SelectedNode.Parent != null)
-			{
-				// We have a Parent Node. Expand it for the User.
-				list.SelectedNode.Parent.Expand();
-
-			}
 
 			thisList = list;
 		}
@@ -589,8 +558,6 @@ namespace Notes
 			}
 
 			list.EndUpdate();
-
-
 
 			if (File.Exists(Program.documentFolderPath + @"\Extensions.json"))
 			{
