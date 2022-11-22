@@ -180,76 +180,6 @@ namespace Notes
 			query = findAndReplaceWindow.findTextField.Text;
 		}
 
-		public void ProtectNote(Note note)
-		{
-
-		}
-
-		public static void UnprotectNote(Note note)
-		{
-
-		}
-
-		public byte[] EncryptString(string content, byte[] key, byte[] IV)
-		{
-			byte[] result = new byte[0];
-
-			if (!String.IsNullOrEmpty(content) && key != null && key.Length >= 1 && IV != null && IV.Length >= 1)
-			{
-				using (Aes AESAlgorithm = Aes.Create())
-				{
-					AESAlgorithm.Key = key;
-					AESAlgorithm.IV = IV;
-
-					ICryptoTransform encryptor = AESAlgorithm.CreateEncryptor(AESAlgorithm.Key, AESAlgorithm.IV);
-
-					using (MemoryStream memoryStream = new MemoryStream())
-					{
-						using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-						{
-							using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
-							{
-								streamWriter.Write(content);
-							}
-
-							result = memoryStream.ToArray();
-						}
-					}
-				}
-			}
-
-			return result;
-		}
-
-		public string DecryptString(byte[] cipherText, byte[] key, byte[] IV)
-		{
-			string result = String.Empty;
-
-			if (cipherText != null && cipherText.Length >= 1 && key != null && key.Length >= 1 && IV != null && IV.Length >= 1)
-			{
-				using (Aes aesAlgorithm = Aes.Create())
-				{
-					aesAlgorithm.Key = key;
-					aesAlgorithm.IV = IV;
-
-					ICryptoTransform decryptor = aesAlgorithm.CreateDecryptor(aesAlgorithm.Key, aesAlgorithm.IV);
-
-					using (MemoryStream memoryStream = new MemoryStream(cipherText))
-					{
-						using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-						{
-							using (StreamReader streamReader = new StreamReader(cryptoStream))
-							{
-								result = streamReader.ReadToEnd();
-							}
-						}
-					}
-				}
-			}
-
-			return result;
-		}
-
 		private void ThisEditor_TextChanged(object sender, EventArgs e)
 		{
 			editor.Text = thisEditor.Text;
@@ -1997,7 +1927,8 @@ namespace Notes
 
 						if (indexOfGroup >= 0 && indexOfNote >= 0)
 						{
-							ProtectNote(note);
+							// Protect the note.
+
 						}
 					}
 				}
